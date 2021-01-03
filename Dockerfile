@@ -33,9 +33,6 @@ COPY docker/www.conf /etc/php/${PHP_VER}/fpm/pool.d/
 ## Installation de composer
 RUN curl -sS https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/bin/composer
-# module dev avec liens
-RUN composer global require "jeromeklam/composer-localdev"
-RUN composer global update
 
 EXPOSE 9000
 EXPOSE 9080
