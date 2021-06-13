@@ -1,4 +1,4 @@
-# Version 1.0.1
+# Version 1.0.2
 
 FROM jeromeklam/u20
 MAINTAINER Jérôme KLAM, "jeromeklam@free.fr"
@@ -13,7 +13,6 @@ RUN apt-get update && apt-get install -y php${PHP_VER} php${PHP_VER}-cli php${PH
 RUN apt-get update && apt-get install -y php${PHP_VER}-mbstring php${PHP_VER}-mysql php${PHP_VER}-xml php${PHP_VER}-soap
 RUN apt-get update && apt-get install -y php${PHP_VER}-dev php${PHP_VER}-tidy php${PHP_VER}-zip php${PHP_VER}-memcached
 RUN apt-get update && apt-get install -y php${PHP_VER}-curl php-ldap php${PHP_VER}-gd php${PHP_VER}-intl php${PHP_VER}-gmp php${PHP_VER}-zmq
-
 RUN apt-get update && apt-get install -y php${PHP_VER}-xdebug php${PHP_VER}-redis php${PHP_VER}-fpm 
 
 # Supervisor
@@ -34,6 +33,11 @@ COPY docker/www.conf /etc/php/${PHP_VER}/fpm/pool.d/
 RUN curl -sS https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/bin/composer
 
+# unoconv 
+RUN apt-get update && apt_get install -y unoconv
+RUn chmod 777 /var/www
+
+# Volumes & ports
 EXPOSE 9000
 EXPOSE 9080
 EXPOSE 8080
