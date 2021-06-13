@@ -34,7 +34,7 @@ RUN curl -sS https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/bin/composer
 
 # unoconv 
-RUN apt-get update && apt_get install -y unoconv
+RUN apt-get update && apt-get install -y unoconv
 RUn chmod 777 /var/www
 
 # Volumes & ports
