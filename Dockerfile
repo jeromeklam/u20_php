@@ -1,4 +1,4 @@
-# Version 1.0.2
+# Version 1.0.3
 
 FROM jeromeklam/u20
 MAINTAINER Jérôme KLAM, "jeromeklam@free.fr"
@@ -42,7 +42,16 @@ EXPOSE 9000
 EXPOSE 9080
 EXPOSE 8080
 
-VOLUME ["/var/www/html"]
+# ssh key
+RUN mkdir -p /user.ssh
+COPY docker/makessh.sh /usr/bin/makessh.sh
+RUN chmod 775 /usr/bin/makessh.sh
+
+RUN mkdir -p /tmp/docker
+VOLUME ["/var/www/html", "/user.ssh"]
 WORKDIR /var/www/html
 
-CMD ["/usr/bin/supervisord", "-n"]
+ADD docker/start.sh /usr/bin/
+RUN chmod 775 /usr/bin/start.sh
+
+CMD ["/usr/bin/start.sh"]
